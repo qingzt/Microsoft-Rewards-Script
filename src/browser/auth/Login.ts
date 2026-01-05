@@ -113,7 +113,6 @@ export class Login {
             throw error
         }
     }
-
     private async detectCurrentState(page: Page): Promise<LoginState> {
         // Make sure we settled before getting a URL
         await page.waitForLoadState('networkidle', { timeout: 5000 }).catch(() => {})
@@ -261,7 +260,7 @@ export class Login {
             case 'GET_A_CODE': {
                 this.bot.logger.info(this.bot.isMobile, 'LOGIN', 'Attempting to bypass "Get code"')
                 // Select sign in other way
-                await this.bot.browser.utils.ghostClick(page, '[data-testid="viewFooter"] span[role="button"]')
+                await this.bot.browser.utils.ghostClick(page, '[data-testid="viewFooter"] span[role="button"] >> nth=-1')
                 await page.waitForLoadState('networkidle', { timeout: 5000 }).catch(() => {})
                 return true
             }
